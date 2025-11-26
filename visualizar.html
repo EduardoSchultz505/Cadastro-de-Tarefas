@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="aulao2.css">
+</head>
+<body>
+
+    <h2>Dados enviados</h2>
+    <button onclick="carregarDados()">Carregar dados</button>
+
+    <div id="tabela-container"></div>
+
+    <script>
+        const url = "http://159.65.228.63/produtos";
+
+        async function carregarDados() {
+            const resp = await fetch(url);
+            const dados = await resp.json();
+
+            criarTabela(dados);
+        }
+
+        function criarTabela(lista) {
+            const container = document.getElementById("tabela-container");
+
+            let tabela = document.getElementById("tabela-dados");
+
+                tabela = document.createElement("table");
+                tabela.id = "tabela-dados";
+                container.appendChild(tabela);
+        
+
+            tabela.innerHTML = "";
+
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th>Descrição</th>
+                    <th>Local</th>
+                    <th>Recursos</th>
+                    <th>Data/Hora</th>
+                    <th>Matrícula</th>
+                    <th>ID</th>
+                </tr>
+            `;
+            tabela.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+
+            lista.forEach(item => {
+                const tr = document.createElement("tr");
+
+                tr.innerHTML = `<td>${item.prioridade}</td>
+                    <td>${item.descricao}</td>
+                    <td>${item.local}</td>
+                    <td>${item.recursosNecessarios}</td>
+                    <td>${item.dataLimite}</td>
+                    <td>${item.matricula ? JSON.stringify(item.matricula) : ""}</td>
+                    <td>${item.id}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+
+            tabela.appendChild(tbody);
+            tabela.class = "tabela"
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="aulao.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Adicionar lembretes</h1>
+        <form style="display: flex; flex-direction: column;">
+
+            <label>Prioridade</label>
+
+            <div>
+                <input type="radio" id="baixa" name="prioridade" value="Baixa">
+                <label for="baixa">Baixa</label><br>
+            </div>
+
+            <div>
+                <input type="radio" id="normal" name="prioridade" value="Normal">
+                <label for="normal">Normal</label><br>
+            </div>
+
+            <div>
+                <input type="radio" id="urgente" name="prioridade" value="Urgente">
+                <label for="urgente">Urgente</label>
+            </div>
+
+            <label>Descrição</label>
+            <input type="text" style="width: 200px;" id="desc">
+
+            <label>Local</label>
+            <input type="text" style="width: 200px;" id="local">
+
+            <label>Recursos Necessários</label>
+            <input type="text" style="width: 200px;" id="recursos">
+
+            <label>Data e hora</label>
+            <input type="datetime-local" style="width: 200px;" id="hora">
+
+            <label>Matrícula</label>
+            <input type="text" style="width: 200px;" id="matricula">
+
+            <button onclick="salvar()" type="button" style="width: 208px;">Salvar</button>
+        </form>
+    </div>
+    <script>
+        const url = "http://159.65.228.63/produtos"
+
+        function salvar() {
+            let dados = {
+                prioridade: document.getElementsByName('prioridade').value,
+                descricao: document.getElementById('desc').value,
+                local: document.getElementById('local').value,
+                recursosNecessarios: document.getElementById('recursos').value,
+                dataLimite: document.getElementById('hora').value,
+                matricula: document.getElementById('matricula').value,
+            }
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+        }
+
+        async function atualizar() {
+            alert("produto salvo com sucesso")
+            const response = await fetch(url)
+            const dados = await response.JSON
+        }
+    </script>
+
+</body>
