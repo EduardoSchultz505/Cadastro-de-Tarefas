@@ -1,70 +1,26 @@
 <!DOCTYPE html>
+<html>
+
 <head>
-    <link rel="stylesheet" href="aulao2.css">
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="visualizar.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
 <body>
+    <div class="outroSite">
+        <button class="btn btn-secondary" onclick="window.location.href='cadastro.html'">Cadastro de Tarefas</a></button>
+    </div>
 
     <h2>Dados enviados</h2>
-    <button onclick="carregarDados()">Carregar dados</button>
+    <button onclick="carregarDados()" class="btn btn-primary">Carregar dados</button>
 
     <div id="tabela-container"></div>
 
-    <script>
-        const url = "http://159.65.228.63/produtos";
-
-        async function carregarDados() {
-            const resp = await fetch(url);
-            const dados = await resp.json();
-
-            criarTabela(dados);
-        }
-
-        function criarTabela(lista) {
-            const container = document.getElementById("tabela-container");
-
-            let tabela = document.getElementById("tabela-dados");
-
-                tabela = document.createElement("table");
-                tabela.id = "tabela-dados";
-                container.appendChild(tabela);
-        
-
-            tabela.innerHTML = "";
-
-            const thead = document.createElement("thead");
-            thead.innerHTML = `
-                <tr>
-                    <th>Descrição</th>
-                    <th>Local</th>
-                    <th>Recursos</th>
-                    <th>Data/Hora</th>
-                    <th>Matrícula</th>
-                    <th>ID</th>
-                </tr>
-            `;
-            tabela.appendChild(thead);
-
-            const tbody = document.createElement("tbody");
-
-            lista.forEach(item => {
-                const tr = document.createElement("tr");
-
-                tr.innerHTML = `<td>${item.prioridade}</td>
-                    <td>${item.descricao}</td>
-                    <td>${item.local}</td>
-                    <td>${item.recursosNecessarios}</td>
-                    <td>${item.dataLimite}</td>
-                    <td>${item.matricula ? JSON.stringify(item.matricula) : ""}</td>
-                    <td>${item.id}</td>
-                `;
-
-                tbody.appendChild(tr);
-            });
-
-            tabela.appendChild(tbody);
-            tabela.class = "tabela"
-        }
-    </script>
+    <script src="script.js"> </script>
 
 </body>
+
 </html>

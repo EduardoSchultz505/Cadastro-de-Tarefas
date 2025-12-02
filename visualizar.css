@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+#tabela-container {
+    width: 100%;
+}
+
+.btn-primary {
+    margin-bottom: 20px;
+}
+table {
+    width: 100%;
+}
+
+thead {
+    background-color: #007bff;
+    color: #ffffff;
+    border: 1px ;
+    border-style: solid;
+}
+
+thead th {
+    padding: 12px 15px;
+}
+
+tbody td {
+    padding: 12px 15px;
+    border: 1px ;
+    border-style: solid;
+}
+
+.outroSite{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
