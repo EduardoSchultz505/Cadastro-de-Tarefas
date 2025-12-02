@@ -51,6 +51,8 @@ async function carregarDados() {
     const resp = await fetch(url)
     const dados = await resp.json()
 
+    await console.log(dados)
+
     criarTabela(dados)
 }
 
@@ -61,6 +63,7 @@ function criarTabela(lista) {
     tabela.id = "tabela-dados"
     tabela.className = "tabela"
     container.appendChild(tabela)
+
 
     const th1 = document.createElement("thead")
     th1.innerHTML = `
@@ -79,11 +82,14 @@ function criarTabela(lista) {
     const td1 = document.createElement("tbody")
 
     lista.forEach(item => {
+        if (!item.recursosNecessarios || item.recursosNecessarios.length === 0)
+            item.recursosNecessarios = "Nenhuma tarefa cadastrada"
         const tr = document.createElement("tr")
 
-        if (item.prioridade === "Urgente") {
+        if (item.prioridade == "Urgente") {
             tr.style.color = "red"
         }
+
 
         tr.innerHTML = `
                     <td>${item.prioridade}</td>
